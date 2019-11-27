@@ -7,8 +7,8 @@ export default {
       return models.Message.findByPk(id); 
     },
 
-    messages: (parent, args, { models }) => {
-      return models.Message.findAll(); 
+    messages: (parent, { limit = 10, offset = 0 }, { models }) => {
+      return models.Message.findAll({ limit, offset }); 
     }
   },
 
