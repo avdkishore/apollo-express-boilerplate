@@ -1,8 +1,9 @@
 export default {
   Query: {
     me: (parent, args, { me, models }) => { 
-      // return models.User.findByPk(me.id); 
-      return me;
+      if (!me) return null;
+      
+      return models.User.findByPk(me.id); 
     },
 
     user: (parent, { id }, { models }) => {
