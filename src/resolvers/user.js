@@ -1,15 +1,16 @@
 export default {
   Query: {
-    me: (parent, args, { me }) => { 
-      return me 
+    me: (parent, args, { me, models }) => { 
+      // return models.User.findByPk(me.id); 
+      return me;
     },
 
     user: (parent, { id }, { models }) => {
-      return models.users[id]
+      return models.User.findByPk(id); 
     },
 
     users: (parent, args, { models }) => { 
-      return Object.values(models.users)
+      return models.User.findAll(); 
     },
   },
 
@@ -19,7 +20,11 @@ export default {
     },
     
     messages: (user, args, { models }) => {
-      return Object.values(models.messages).filter(message => message.userId === user.id)
-    }
+      return models.Message.findAll({
+        where: {
+          userId: user.id
+        },
+      });
+    },
   },
 }
