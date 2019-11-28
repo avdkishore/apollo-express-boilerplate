@@ -1,15 +1,19 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import cors from 'cors';
+import DataLoader from 'dataloader';
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 
 import schema from './schema';
 import resolvers from './resolvers';
+import loaders from './loaders';
 import models, { sequelize } from './models';
 
 const app = express();
 
 app.use(cors());
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 const getMe = async req => {
   const token = req.headers['x-token'];
@@ -24,6 +28,8 @@ const getMe = async req => {
 }
 
 const server = new ApolloServer({
+  introspection: !isProduction,
+  playground: !isProduction,
   typeDefs: schema,
   resolvers,
   formatError: error => {
@@ -45,7 +51,10 @@ const server = new ApolloServer({
       models,
       me, 
       secret: process.env.JWT_SECRET,
-    }
+      loaders: {
+        user: new DataLoader(keys => loaders.user.batchUsers(keys, models))  
+      },
+    };
   },
 });
 

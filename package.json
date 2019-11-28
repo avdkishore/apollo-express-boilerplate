@@ -7,9 +7,12 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon --exec babel-node server.js",
-    "test": "NODE_ENV=test mocha --require @babel/register src/**/*.test.js"
+    "test": "NODE_ENV=test mocha --require @babel/register src/**/*.test.js",
+    "build": "babel . -d dist --ignore \"node_modules/*\",\"src/test/*\" ",
+    "serve": "node dist/server.js"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.4",
     "@babel/core": "^7.7.4",
     "@babel/node": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
@@ -25,6 +28,7 @@
     "babel-plugin-inline-dotenv": "^1.5.0",
     "bcrypt": "^3.0.7",
     "cors": "^2.8.5",
+    "dataloader": "^2.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^14.5.8",

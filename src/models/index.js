@@ -1,16 +1,23 @@
 import Sequelize from 'sequelize';
 import config from '../config';
 
-const sequelize = new Sequelize(
-  config.DATABASE,
-  config.DATABASE_USER,
-  config.DATABASE_PASSWORD,
-  {
-    host: config.DATABASE_HOST,
+let sequelize;
+if (process.env.DATABASE_URL) {
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
-    logging: config.LOGGING
-  },
-);
+  });
+} else {
+  sequelize = new Sequelize(
+    config.DATABASE,
+    config.DATABASE_USER,
+    config.DATABASE_PASSWORD,
+    {
+      host: config.DATABASE_HOST,
+      dialect: 'postgres',
+      logging: config.LOGGING
+    },
+  );
+}
 
 const models = {
   User: sequelize.import('./user'),
