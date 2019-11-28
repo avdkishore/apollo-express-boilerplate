@@ -1,4 +1,4 @@
-# apollo-express-graphql
+# apollo-express-boilerplate
 
 An Apollo GraphQL Server with Express and PostgreSQL.
 
