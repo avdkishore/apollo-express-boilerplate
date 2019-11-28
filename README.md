@@ -13,7 +13,7 @@ An Apollo GraphQL Server with Express and PostgreSQL.
 
 ## Installation
 
-* `git clone git@github.com:avdkishore/apollo-express-graphql.git`
+* `git clone git@github.com:avdkishore/apollo-express-boilerplate.git`
 * `cd apollo-express-graphql`
 * `yarn`
 * start PostgreSQL database
