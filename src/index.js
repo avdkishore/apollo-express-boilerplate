@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import cors from 'cors';
@@ -53,45 +51,5 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, path: '/graphql' });
 
-const port = process.env.PORT || 8000;
-const eraseDatabaseOnSync = true;
-
-sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
-  if (eraseDatabaseOnSync) {
-    createUsersWithMessages(new Date());
-  }
-  
-  app.listen({ port }, () => {
-    console.log(`Apollo Server is on http://localhost:${port}/graphql`);
-  });
-});
-
-const createUsersWithMessages = async date => {
-  await models.User.create({
-    username: 'kishore',
-    email: 'kishore@example.com',
-    password: 'somepassword',
-    role: 'ADMIN',
-    messages: [{
-      text: 'Published the boiler plate',
-      createdAt: date.setSeconds(date.getSeconds() + 1),
-    }],
-  }, {
-    include: [models.Message]
-  });
-
-  await models.User.create({
-    username: 'johndoe',
-    email: 'johndoe@example.com',
-    password: 'somerandompassword',
-    messages: [{
-      text: 'Happy to release...',
-      createdAt: date.setSeconds(date.getSeconds() + 1),
-    }, {
-      text: 'Published a complete ...',
-      createdAt: date.setSeconds(date.getSeconds() + 1),
-    }]
-  }, {
-    include: [models.Message]
-  });
-}
+export default app;
+export { sequelize, models };

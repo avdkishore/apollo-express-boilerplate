@@ -1,11 +1,14 @@
 import Sequelize from 'sequelize';
+import config from '../config';
 
 const sequelize = new Sequelize(
-  process.env.DATABASE,
-  process.env.DATABASE_USER,
-  process.env.DATABASE_PASSWORD,
+  config.DATABASE,
+  config.DATABASE_USER,
+  config.DATABASE_PASSWORD,
   {
+    host: config.DATABASE_HOST,
     dialect: 'postgres',
+    logging: config.LOGGING
   },
 );
 

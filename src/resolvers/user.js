@@ -75,10 +75,6 @@ export default {
   },
 
   User: {
-    username: user => { 
-      return user.username.toUpperCase();
-    },
-    
     messages: (user, args, { models }) => {
       return models.Message.findAll({
         where: {
