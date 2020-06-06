@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "apollo-server": "^2.9.12",
-    "apollo-server-express": "^2.9.12",
+    "apollo-server-express": "^2.14.2",
     "babel-plugin-inline-dotenv": "^1.5.0",
     "bcrypt": "^3.0.7",
     "cors": "^2.8.5",
