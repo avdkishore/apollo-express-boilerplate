@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 const env = process.env.NODE_ENV || 'development';
 const config = {};
@@ -10,7 +10,7 @@ fs.readdirSync(__dirname)
   .filter(f => !f.includes('index.js') && !f.includes('env'))
   .forEach((filename) => {
     // eslint-disable-next-line
-    Object.assign(config, require(`./${filename}`));
+    Object.assign(config, require(`./${filename}`).default);
   });
 
 /*
@@ -25,9 +25,9 @@ if (isEnvExisting) {
 
     if (env === basename) {
       // eslint-disable-next-line
-      Object.assign(config, require(`./env/${filename}`))
+      Object.assign(config, require(`./env/${filename}`).default)
     }
   });
 }
 
-module.exports = config;
+export default config;

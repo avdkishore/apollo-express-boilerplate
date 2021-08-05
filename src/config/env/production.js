@@ -6,5 +6,5 @@ export default {
   DATABASE_USER: process.env.DATABASE_USER || 'postgres',
   DATABASE_PASSWORD: process.env.DATABASE_PASSWORD || 'postgres',
   LOGGING: true,
-  JWT_SECRET: process.env.JWT_SECRET || 'iwufh89whrb32hjbr.023fsadlkfj4.3wepo',
+  JWT_SECRET: process.env.JWT_SECRET || '',
 }
